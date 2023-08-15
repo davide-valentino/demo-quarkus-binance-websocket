@@ -1,26 +1,18 @@
 package dev.dvalentino.demo.quarkus.binance.websocket.client;
 
-import dev.dvalentino.demo.quarkus.binance.websocket.data.Message;
 import io.quarkus.logging.Log;
 import jakarta.websocket.*;
 
 @ClientEndpoint
 public class BinanceWebSocketClient {
-    private final Message message;
-
-    public BinanceWebSocketClient(final Message message) {
-        this.message = message;
-    }
-
     @OnOpen
     public void open(Session session) {
         Log.info("Connected open: " + session.getId() + " " + session.getRequestURI());
     }
 
     @OnMessage
-    void onMessage(String msg) {
-        Log.info("Received message: " + msg);
-        message.setMessage(msg);
+    void onMessage(String tickerData) {
+        Log.info("Incoming ticker data: " + tickerData);
     }
 
     @OnError

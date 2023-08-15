@@ -32,7 +32,7 @@ public class BinanceRunnerFactory {
                     Log.info("Connection with websocket session id: " + session.getId() + " established");
                     Thread.currentThread().join();
                 } catch (DeploymentException | IOException e) {
-                    Log.error("Something went wrong on BinanceRunner or thread interrupted");
+                    Log.error("Something went wrong on BinanceRunnerFactory", e);
                     throw new RuntimeException(e);
                 }catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
